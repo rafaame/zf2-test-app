@@ -6,5 +6,6 @@ nbproject
 .idea
 .project
 .settings
+sftp-config.json
 composer.lock
 vendor/bin
