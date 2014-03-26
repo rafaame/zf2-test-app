@@ -8,4 +8,4 @@ nbproject
 .settings
 sftp-config.json
 composer.lock
-vendor/bin
+vendor

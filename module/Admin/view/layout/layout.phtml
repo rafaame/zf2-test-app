@@ -26,11 +26,27 @@
 	  		<h1>Aplicação</h1>
 	  	</header>
 
-	  	<section class="content">
+	  	<div class="wrapper">
 
-	  		<?= $this->content ?>
+	  		<nav class="left-menu">
 
-	  	</section>
+	  			<ul>
+
+	  				<li><a href="<?= $this->url('admin') ?>">Home</a></li>
+	  				<li><a href="<?= $this->url('admin', ['controller' => 'admin']) ?>">Administrators</a></li>
+	  				<li><a href="<?= $this->url('admin', ['controller' => 'user']) ?>">Users</a></li>
+
+	  			</ul>
+
+	  		</nav>
+
+		  	<section class="content">
+
+		  		<?= $this->content ?>
+
+		  	</section>
+
+	  	</div>
 
 	  	<footer>
 
