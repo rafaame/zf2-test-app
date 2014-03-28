@@ -20,6 +20,22 @@
   </head>
   <body>
 
+  	<?= 
+  		$this->flashMessenger()
+  				->setMessageOpenFormat('<div%s><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+            	->setMessageSeparatorString('</li><li>')
+            	->setMessageCloseString('</li></ul></div>')
+            	->render('error', ['text-center', 'alert', 'alert-dismissable', 'alert-danger'])
+    ?>
+
+    <?= 
+  		$this->flashMessenger()
+  				->setMessageOpenFormat('<div%s><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+            	->setMessageSeparatorString('</li><li>')
+            	->setMessageCloseString('</li></ul></div>')
+            	->render('success', ['text-center', 'alert', 'alert-dismissable', 'alert-success'])
+    ?>
+
   	<div class="container">
 
 	  	<header>
