@@ -1,6 +1,6 @@
 <div class="row">
 
-	<h1 class="col-xs-12">Users</h1>
+	<h1 class="col-xs-12">Admins</h1>
 
 </div>
 
@@ -9,7 +9,7 @@
 	<table class="col-xs-12 table table-striped">
 
 		<thead>
-			<tr>	
+			<tr>
 				<th>#</th>
 				<th>Name</th>
 				<th>Email</th>
@@ -30,8 +30,8 @@
 					<td><?= $entity->getDateRegistered()->format('d/m/Y') ?></td>
 					<td>
 
-						<a class="btn btn-default" href="<?= $this->url('admin/wildcard', ['controller' => 'user', 'action' => 'edit', 'id' => $entity->getId()]) ?>">Edit</a>
-						<a class="btn btn-danger" href="<?= $this->url('admin/wildcard', ['controller' => 'user', 'action' => 'delete', 'id' => $entity->getId()]) ?>">Delete</a>
+						<a class="btn btn-default" href="<?= $this->url('admin/wildcard', ['controller' => 'admin', 'action' => 'edit', 'id' => $entity->getId()]) ?>">Edit</a>
+						<a class="btn btn-danger" href="<?= $this->url('admin/wildcard', ['controller' => 'admin', 'action' => 'delete', 'id' => $entity->getId()]) ?>">Delete</a>
 
 					</td>
 
@@ -47,6 +47,6 @@
 
 <div class="row">
 
-	<a class="btn btn-primary" href="<?= $this->url('admin', ['controller' => 'user', 'action' => 'add']) ?>">Add</a>
+	<a class="btn btn-primary" href="<?= $this->url('admin', ['controller' => 'admin', 'action' => 'add']) ?>">Add</a>
 
 </div>

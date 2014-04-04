@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="img/facicon.png" rel="shortcut icon">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+  	<?= 
+  		$this->flashMessenger()
+  				->setMessageOpenFormat('<div%s><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+            	->setMessageSeparatorString('</li><li>')
+            	->setMessageCloseString('</li></ul></div>')
+            	->render('error', ['text-center', 'alert', 'alert-dismissable', 'alert-danger'])
+    ?>
+
+    <?= 
+  		$this->flashMessenger()
+  				->setMessageOpenFormat('<div%s><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+            	->setMessageSeparatorString('</li><li>')
+            	->setMessageCloseString('</li></ul></div>')
+            	->render('success', ['text-center', 'alert', 'alert-dismissable', 'alert-success'])
+    ?>
+
+  	<div class="container">
+
+	  	<header>
+	  		<h1>Login</h1>
+	  	</header>
+
+	  	<div class="wrapper">
+
+		  	<section class="content">
+
+		  		<?= $this->content ?>
+
+		  	</section>
+
+	  	</div>
+
+	  	<footer>
+
+	  		<div class="text1">Text 1</div>
+	  		<div class="copyright">Copyright</div>
+	  		<div class="text2">Text 2</div>
+
+	  	</footer>
+
+  	</div>
+
+    <script src="js/script.min.js"></script>
+  </body>
+</html>

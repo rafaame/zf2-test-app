@@ -12,9 +12,9 @@ namespace Admin\Controller;
 use Zend\View\Model\ViewModel,
 
 	Admin\Form,
-	Application\Model;
+	Admin\Model;
 
-class UserController extends Base
+class AdminController extends Base
 {
 
     public function indexAction()
@@ -23,7 +23,7 @@ class UserController extends Base
     	$objectManager = $this->getObjectManager();
 
     	$entities = $objectManager
-                    ->getRepository('Application\Entity\User')
+                    ->getRepository('Admin\Entity\Admin')
                     ->findBy([]);
 
         return new ViewModel
@@ -41,7 +41,7 @@ class UserController extends Base
     	$serviceLocator = $this->getServiceLocator();
     	$objectManager = $this->getObjectManager();
 
-		$form = new Form\User\Add($serviceLocator, $objectManager);
+		$form = new Form\Admin\Add($serviceLocator, $objectManager);
 
     	if($this->request->isPost())
     	{
@@ -58,19 +58,19 @@ class UserController extends Base
     			//$objectManager->persist($entity);
     			//$objectManager->flush();
 
-    			$model = new Model\User($serviceLocator, $objectManager);
+    			$model = new Model\Admin($serviceLocator, $objectManager);
     			$model->save($entity);
 
 		    	if($entity->getId())
 		    	{
 
-		    		$this->flashMessenger()->addSuccessMessage('User successfully added to the database.');
+		    		$this->flashMessenger()->addSuccessMessage('Admin successfully added to the database.');
 
-					return $this->redirect()->toRoute('admin', ['controller' => 'user']);
+					return $this->redirect()->toRoute('admin', ['controller' => 'admin']);
 
 		    	}
 		    	else
-		    		$this->flashMessenger()->addErrorMessage('There was an error adding the user to the database. Contact the administrator.');
+		    		$this->flashMessenger()->addErrorMessage('There was an error adding the admin to the database. Contact the administrator.');
 
 		    }
 
@@ -93,10 +93,10 @@ class UserController extends Base
 
     	$id = $this->getEvent()->getRouteMatch()->getParam('id');
 		$entity = $objectManager
-					->getRepository('Application\Entity\User')
+					->getRepository('Application\Entity\Admin')
 					->findOneBy(['id' => $id]);
 
-		$form = new Form\User\Add($serviceLocator, $objectManager);
+		$form = new Form\Admin\Add($serviceLocator, $objectManager);
 
 		if($entity)
 		{
@@ -112,11 +112,11 @@ class UserController extends Base
 	    		if($form->isValid())
 	    		{
 
-					$model = new Model\User($serviceLocator, $objectManager);
+					$model = new Model\Admin($serviceLocator, $objectManager);
     				$model->save($entity);
 
-		    		$this->flashMessenger()->addSuccessMessage('User successfully saved to the database.');
-		    		return $this->redirect()->toRoute('admin', ['controller' => 'user']);
+		    		$this->flashMessenger()->addSuccessMessage('Admin successfully saved to the database.');
+		    		return $this->redirect()->toRoute('admin', ['controller' => 'admin']);
 
 			    }
 
@@ -124,7 +124,7 @@ class UserController extends Base
 
 		}
 		else
-			$this->flashMessenger()->addErrorMessage('Could not find an user with the id you specified.');
+			$this->flashMessenger()->addErrorMessage('Could not find an admin with the id you specified.');
 
 		return new ViewModel
     	([
@@ -142,22 +142,22 @@ class UserController extends Base
 
     	$id = $this->getEvent()->getRouteMatch()->getParam('id');
 		$entity = $objectManager
-					->getRepository('Application\Entity\User')
+					->getRepository('Admin\Entity\Admin')
 					->findOneBy(['id' => $id]);
 
 		if($entity)
 		{
 
-			$model = new Model\User($serviceLocator, $objectManager);
+			$model = new Model\Admin($serviceLocator, $objectManager);
     		$model->remove($entity);
 
-			$this->flashMessenger()->addSuccessMessage('User successfully deleted from the database.');
+			$this->flashMessenger()->addSuccessMessage('Admin successfully deleted from the database.');
 
 		}
 		else
-			$this->flashMessenger()->addErrorMessage('Could not find an user with the id you specified.');
+			$this->flashMessenger()->addErrorMessage('Could not find an admin with the id you specified.');
 
-		return $this->redirect()->toRoute('admin', ['controller' => 'user']);
+		return $this->redirect()->toRoute('admin', ['controller' => 'admin']);
 
     }
 

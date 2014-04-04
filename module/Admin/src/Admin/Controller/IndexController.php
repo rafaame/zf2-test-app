@@ -9,20 +9,29 @@
 
 namespace Admin\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Zend\View\Model\ViewModel,
 
-class IndexController extends AbstractActionController
+	Admin\Form,
+	Admin\Model;
+
+class IndexController extends Base
 {
 
     public function indexAction()
     {
 
+    	$serviceLocator = $this->getServiceLocator();
+    	$objectManager = $this->getObjectManager();
+
+    	$model = new Model\Admin($serviceLocator, $objectManager);
+
+    	if(!$model->isLogged())
+    		return $this->redirect()->toRoute('admin', ['controller' => 'auth', 'action' => 'login']);
+
         return new ViewModel
         ([
 
-        	'test' => 5,
-        	'test2' => 6,
+      		
 
         ]);
 

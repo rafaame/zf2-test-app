@@ -40,6 +40,22 @@ return array(
             ),
             
         ),
+
+        'authentication' => array
+        (
+            
+            'orm_default' => array
+            (
+                
+                'object_manager' => 'Doctrine\ORM\EntityManager',
+                'identity_class' => 'Admin\Entity\Admin',
+                'identity_property' => 'email',
+                'credential_property' => 'password',
+                //'credentialCallable' => 'Admin\Entity\Admin::hashPassword',
+                
+            ),
+            
+        ),
         
     ),
     
@@ -96,6 +112,17 @@ return array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ),
+        'factories' => array
+        (
+
+            'Admin\Auth' => function($sm)
+            {
+
+                return $sm->get('doctrine.authenticationservice.orm_default');
+                
+            },
+
+        ),
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
@@ -116,7 +143,9 @@ return array(
         'invokables' => array(
 
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
-            'Admin\Controller\User' => 'Admin\Controller\UserController'
+            'Admin\Controller\User' => 'Admin\Controller\UserController',
+            'Admin\Controller\Admin' => 'Admin\Controller\AdminController',
+            'Admin\Controller\Auth' => 'Admin\Controller\AuthController',
 
         ),
 
@@ -132,6 +161,7 @@ return array(
         'template_map' => array(
 
             'admin/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'admin/login'           => __DIR__ . '/../view/layout/login.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
@@ -148,9 +178,9 @@ return array(
             __NAMESPACE__ => 
             [
 
-                /*'Auth' => 'admin/login',
+                'Auth' => 'admin/login',
 
-                'Order' =>
+                /*'Order' =>
                 [
 
                     'print' => 'admin/empty',
