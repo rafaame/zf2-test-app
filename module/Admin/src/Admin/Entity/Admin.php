@@ -29,6 +29,9 @@ class Admin
     /** @ORM\Column(type="string") */
     public $password;
 
+    /** @ORM\Column(type="string") */
+    public $salt;
+
     /** @ORM\Column(type="datetime") */
     public $dateRegistered;
 
@@ -38,6 +41,7 @@ class Admin
         $this->name = '';
         $this->email = '';
         $this->password = '';
+        $this->salt = $this->generateSalt();
         $this->dateRegistered = new \Datetime('now');
 
     }
@@ -131,11 +135,68 @@ class Admin
      */
     public function setPassword($password)
     {
+
+        if($password == '')
+            return;
     
         $this->password = $password;
     
         return $this;
     
+    }
+
+    public static function hashPassword($entity, $password)
+    {
+
+        return md5($entity->getSalt() . $password);
+
+    }
+
+    /**
+     * Getter for salt
+     *
+     * @return mixed
+     */
+    public function getSalt()
+    {
+    
+        return $this->salt;
+    
+    }
+    
+    /**
+     * Setter for salt
+     *
+     * @param mixed $salt Value to set
+     *
+     * @return self
+     */
+    public function setSalt($salt)
+    {
+    
+        $this->salt = $salt;
+    
+        return $this;
+    
+    }
+
+    private function generateSalt()
+    {
+
+        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+        $pass = array();
+        $alphaLength = strlen($alphabet) - 1;
+
+        for ($i = 0; $i < 64; $i++) 
+        {
+
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+
+        }
+
+        return implode($pass);
+
     }
 
     /**

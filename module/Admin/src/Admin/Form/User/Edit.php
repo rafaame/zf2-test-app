@@ -8,7 +8,7 @@ use Zend\InputFilter\InputFilter,
 
 	Admin\Entity;
 
-class Add extends Base
+class Edit extends Base
 {
 	
     public function __construct($serviceLocator, $objectManager)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Admin\Form\User;
+namespace Admin\Form\Admin;
 
 use Zend\InputFilter\InputFilter,
 	Zend\InputFilter\InputFilterProviderInterface,
@@ -8,13 +8,15 @@ use Zend\InputFilter\InputFilter,
 
 	Admin\Entity;
 
-class Add extends Base
+class Edit extends Base
 {
 	
     public function __construct($serviceLocator, $objectManager)
     {
 
         parent::__construct($serviceLocator, $objectManager);
+
+        $this->get('password')->removeAttribute('required');
 		
 	}
 
@@ -27,7 +29,19 @@ class Add extends Base
         return array_merge(parent::getInputFilterSpecification(),
         [
 
-        	
+        	'password' => 
+			[
+
+                'required' => false,
+
+                'validators' => 
+				[
+					
+					
+					
+				]
+
+            ],
 
         ]);
 

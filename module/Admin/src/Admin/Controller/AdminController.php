@@ -59,7 +59,7 @@ class AdminController extends Base
     			//$objectManager->flush();
 
     			$model = new Model\Admin($serviceLocator, $objectManager);
-    			$model->save($entity);
+    			$model->save($entity, true);
 
 		    	if($entity->getId())
 		    	{
@@ -93,10 +93,10 @@ class AdminController extends Base
 
     	$id = $this->getEvent()->getRouteMatch()->getParam('id');
 		$entity = $objectManager
-					->getRepository('Application\Entity\Admin')
+					->getRepository('Admin\Entity\Admin')
 					->findOneBy(['id' => $id]);
 
-		$form = new Form\Admin\Add($serviceLocator, $objectManager);
+		$form = new Form\Admin\Edit($serviceLocator, $objectManager);
 
 		if($entity)
 		{
@@ -106,14 +106,19 @@ class AdminController extends Base
 	    	if($this->request->isPost())
 	    	{
 
-	    		$data = $this->request->getPost();
+	    		$data = $this->request->getPost()->toArray();
+	    		$doPasswordHashing = true;
+
+	    		if(!$data['password'])
+	    			$doPasswordHashing = false;
+
 	    		$form->setData($data);
 
 	    		if($form->isValid())
 	    		{
 
 					$model = new Model\Admin($serviceLocator, $objectManager);
-    				$model->save($entity);
+    				$model->save($entity, $doPasswordHashing);
 
 		    		$this->flashMessenger()->addSuccessMessage('Admin successfully saved to the database.');
 		    		return $this->redirect()->toRoute('admin', ['controller' => 'admin']);
@@ -138,6 +143,7 @@ class AdminController extends Base
     public function deleteAction()
     {
 
+    	$serviceLocator = $this->getServiceLocator();
     	$objectManager = $this->getObjectManager();
 
     	$id = $this->getEvent()->getRouteMatch()->getParam('id');

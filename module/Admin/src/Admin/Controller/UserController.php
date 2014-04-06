@@ -96,7 +96,7 @@ class UserController extends Base
 					->getRepository('Application\Entity\User')
 					->findOneBy(['id' => $id]);
 
-		$form = new Form\User\Add($serviceLocator, $objectManager);
+		$form = new Form\User\Edit($serviceLocator, $objectManager);
 
 		if($entity)
 		{

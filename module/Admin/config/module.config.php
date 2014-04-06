@@ -51,7 +51,7 @@ return array(
                 'identity_class' => 'Admin\Entity\Admin',
                 'identity_property' => 'email',
                 'credential_property' => 'password',
-                //'credentialCallable' => 'Admin\Entity\Admin::hashPassword',
+                'credentialCallable' => 'Admin\Entity\Admin::hashPassword',
                 
             ),
             
@@ -194,6 +194,20 @@ return array(
         ],
 
     ),
+
+    'view_helpers' => array
+    (
+        
+        'invokables' => array
+        (
+            
+            //Application specific
+            'loggedAdmin' => 'Admin\View\Helper\LoggedAdmin',
+            
+        ),
+        
+    ),
+
     // Placeholder for console routes
     'console' => array(
         'router' => array(

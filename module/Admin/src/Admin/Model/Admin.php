@@ -108,10 +108,13 @@ class Admin
 		
 	}
 
-	public function save(Entity\Admin $entity)
+	public function save(Entity\Admin $entity, $doPasswordHashing = false)
 	{
 
 		$objectManager = $this->getObjectManager();
+
+		if($doPasswordHashing)
+			$entity->setPassword( Entity\Admin::hashPassword($entity, $entity->getPassword()) );
 
 		$objectManager->persist($entity);
 		$objectManager->flush();

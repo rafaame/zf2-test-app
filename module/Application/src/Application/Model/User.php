@@ -35,7 +35,13 @@ class User
 	public function save(Entity\User $entity)
 	{
 
+		$serviceLocator = $this->getServiceLocator();
 		$objectManager = $this->getObjectManager();
+
+		$modelAdmin = new \Admin\Model\Admin($serviceLocator, $objectManager);
+
+		if($loggedAdmin = $modelAdmin->getCurrent())
+			$entity->setRegisteredBy($loggedAdmin);
 
 		$objectManager->persist($entity);
 		$objectManager->flush();
